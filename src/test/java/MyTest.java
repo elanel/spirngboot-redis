@@ -1,5 +1,7 @@
-import com.lc.Starter;
-import com.lc.service.RedisService;
+import com.elan.Starter;
+import com.elan.service.RedisService;
+import com.elan.service.WeatherDataService;
+import com.elan.util.LogUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +16,27 @@ import java.util.Map;
 public class MyTest {
     @Autowired
     private RedisService redisService;
+
+    @Autowired
+    private WeatherDataService weatherDataService;
+
     @Test
     public void redisTest(){
         redisService.set("a","a1");
         System.out.println(redisService.get("a"));
     }
+
+    @Test
+    public void testLog(){
+        LogUtil.error("hah",this.getClass());
+    }
+
+    @Test
+    public void testExecutor()
+    {
+        weatherDataService.doGetWeahterAsync();
+    }
+
 
     @Test
     public void hashTest(){

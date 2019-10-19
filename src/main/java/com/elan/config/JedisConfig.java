@@ -1,5 +1,5 @@
 /*
-package com.lc.config;
+package com.elan.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

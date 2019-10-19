@@ -1,6 +1,6 @@
-package com.lc.service;
+package com.elan.service;
 
-import com.lc.util.JsonUtil;
+import com.elan.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -15,10 +15,13 @@ public class RedisService {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
     /**
      * 一周有多少秒
      */
     private static final long WEEK_SECONDS = 7 * 24 * 60 * 60;
+    private static final long MIN_SEC = 60*10;
 
 
     /**
@@ -28,7 +31,11 @@ public class RedisService {
      * @param value
      */
     public void set(String key, Object value) {
-        redisTemplate.opsForValue().set(key, JsonUtil.convertObj2String(value), WEEK_SECONDS, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(key,value, MIN_SEC, TimeUnit.SECONDS);
+    }
+
+    public void setStr(String key, String value) {
+        stringRedisTemplate.opsForValue().set(key,value, MIN_SEC, TimeUnit.SECONDS);
     }
 
     /**
@@ -80,8 +87,12 @@ public class RedisService {
      * @param key
      * @return
      */
-    public Object get(String key) {
+     public Object get(String key) {
         return redisTemplate.opsForValue().get(key);
+    }
+
+    public String getStr(String key) {
+        return stringRedisTemplate.opsForValue().get(key);
     }
 
     /**

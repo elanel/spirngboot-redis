@@ -1,0 +1,26 @@
+server:
+    port: 8081
+spring:
+    dataSource:
+        driverClassName: com.mysql.jdbc.Driver
+        password: root
+        url: jdbc:mysql://localhost:3306/weather
+        username: root
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+    mvc:
+        view:
+            prefix: /WEB-INF/jsp/
+            suffix: .jsp
+    redis:
+        database: 0
+        host: 192.168.56.129
+        lettuce:
+            pool:
+                max-active: 8
+                max-idle: 8
+                max-wait: -1
+                min-idle: 0
+        password: 123456
+        port: 6379
+        timeout: 10000ms
