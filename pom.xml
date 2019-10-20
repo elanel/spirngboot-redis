@@ -77,6 +77,10 @@
 	</dependency> -->
 	  <!-- http client for restTemplet-->
 	  <dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-thymeleaf</artifactId>
+	  </dependency>
+	  <dependency>
 		  <groupId>org.apache.httpcomponents</groupId>
 		  <artifactId>httpclient</artifactId>
 		  <version>4.5.7</version>
