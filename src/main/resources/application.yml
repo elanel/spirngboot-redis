@@ -1,6 +1,8 @@
 server:
     port: 8081
 spring:
+    thymeleaf:
+        cache: false  #热部署 静态文件
     dataSource:
         driverClassName: com.mysql.jdbc.Driver
         password: root

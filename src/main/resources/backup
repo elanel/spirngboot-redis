@@ -1,0 +1,4 @@
+
+
+mybatis:
+    type-aliases-package: com.elan.pojo
