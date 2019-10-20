@@ -31,11 +31,11 @@ public class RedisService {
      * @param value
      */
     public void set(String key, Object value) {
-        redisTemplate.opsForValue().set(key,value, MIN_SEC, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(key,value, WEEK_SECONDS, TimeUnit.SECONDS);
     }
 
     public void setStr(String key, String value) {
-        stringRedisTemplate.opsForValue().set(key,value, MIN_SEC, TimeUnit.SECONDS);
+        stringRedisTemplate.opsForValue().set(key,value, WEEK_SECONDS, TimeUnit.SECONDS);
     }
 
     /**

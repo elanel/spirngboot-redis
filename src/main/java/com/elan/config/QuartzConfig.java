@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class QuartzConfig {
 
-    public static int INTERVAL_SEC=30;
+    public static int INTERVAL_SEC=60*10;
 
     //jobDetail
     @Bean

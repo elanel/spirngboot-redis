@@ -60,18 +60,43 @@ public class WeatherDataServiceImpl implements WeatherDataService {
 	//TODO: 优化设置
 	@Async("simpleExecutor")
 	public void doGetWeahterAsync() {
-		for (long j= 101010100; j< 101360000; j+=10000){
-           String uri = Url.BY_ID+j;
-			ResponseEntity<String> respString=null;
-			WeatherResponse resp = null;
-			String strBody = null;
-			resp=getWeatherResponse(uri, strBody);
-			if(!StringUtils.isEmpty(resp)){
-				if (resp.getStatus()==1000){
-					LogUtil.info("=========>"+uri,this.getClass());
-					redisService.set(uri, resp);
+		for (long j= 101280101; j< 101282104; j+=100){
+			//失败计数器
+			int countInvalid = 0;
+			for (long i=j;i<101282104;i++){
+			  String uri = Url.BY_ID+i;
+			  ResponseEntity<String> respString=null;
+			  WeatherResponse resp;
+			  String strBody = null;
+			  resp=getWeatherResponse(uri, strBody);
+				try {
+					//防止访问过度
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
-			}
+			  if(!StringUtils.isEmpty(resp)){
+				  if (resp.getStatus()==1000){
+					  LogUtil.info("=========>"+uri,this.getClass());
+					  redisService.set(uri, resp);
+				  }else{
+                     countInvalid++;
+				  }
+				  if (countInvalid>=3){
+				  	  //正常无此城市
+					  LogUtil.info("=========>faile:"+countInvalid,this.getClass());
+					  break;
+				  }
+
+			  }else{
+			  	  //异常终止同步
+				  countInvalid++;
+				  if (countInvalid>=3){
+					  LogUtil.info("=========>faile:"+countInvalid,this.getClass());
+					  break;
+				  }
+			  }
+		  }
 		}
 	}
 
