@@ -6,8 +6,6 @@ import java.util.List;
 /**
  * 天气信息.
  * 
- * @since 1.0.0 2017年11月21日
- * @author <a href="https://waylau.com">Way Lau</a> 
  */
 public class Weather implements Serializable {
 
